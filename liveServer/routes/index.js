@@ -8,4 +8,8 @@ router.get('/', function(req, res, next) {
 
   res.sendFile(path.resolve(__dirname, '../index.html'))
 });
+
+router.get('/ping', function(req, res, next){
+  res.send('ok')
+})
 module.exports = router;
