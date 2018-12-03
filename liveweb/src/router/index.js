@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import HomeCom from '@/views/home'
 import menus from '@/config/menus.js'
 
 Vue.use(Router)
@@ -10,7 +10,7 @@ export default new Router({
     {
       path: '/',
       name: '首页',
-      component: HelloWorld,
+      component: HomeCom,
       children: menus
     }
   ]
