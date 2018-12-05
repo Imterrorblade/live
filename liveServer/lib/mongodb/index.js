@@ -3,7 +3,7 @@ var mongoose = require('mongoose')
 var config = require('./config.js')
 
 //连接数据库
-mongoose.connect(url)
+mongoose.connect(config.url)
 
 //获取数据连接
 const connect = mongoose.connection
@@ -14,7 +14,7 @@ connect.on('error',err => {
   console.log(err)
 })
 
-connect.on('connnected', () => {
+connect.on('connected', () => {
   console.log('mongodb 已连接')
 })
 
