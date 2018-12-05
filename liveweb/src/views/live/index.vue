@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     init(){
-      this.ping()
+      // this.ping()
     },
     ping(){
       api.ping().then(()=>{
