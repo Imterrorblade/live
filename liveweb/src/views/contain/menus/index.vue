@@ -9,12 +9,12 @@
 <script>
 import menus from '@/config/menus.js'
 export default {
-  data(){
+  data () {
     return {
     }
   },
   computed: {
-    menus(){
+    menus () {
       return menus.map(menu => {
         return {
           path: `/${menu.path}`,
@@ -23,10 +23,10 @@ export default {
       })
     },
     activeMenu: {
-      get(){
+      get () {
         return this.$route.path
       },
-      set(value){
+      set (value) {
         this.$router.push({
           path: value
         })

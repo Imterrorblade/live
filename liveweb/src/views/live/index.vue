@@ -5,22 +5,22 @@
 import api from '@/api/live.js'
 import ContainCom from '@/views/contain'
 export default {
-  data(){
+  data () {
     return {}
   },
   methods: {
-    init(){
+    init () {
       // this.ping()
     },
-    ping(){
-      api.ping().then(()=>{
+    ping () {
+      api.ping().then(() => {
         alert('成功')
       }).catch(err => {
-        alert('ping 失败')
+        console.log(err)
       })
     }
   },
-  mounted(){
+  mounted () {
     this.init()
   },
   components: {
@@ -28,4 +28,3 @@ export default {
   }
 }
 </script>
-

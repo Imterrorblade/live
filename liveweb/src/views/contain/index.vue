@@ -6,10 +6,10 @@
 <script>
 import Menus from '@/views/contain/menus'
 export default {
-  data(){
+  data () {
     return {}
   },
-  components:{
+  components: {
     Menus
   }
 }

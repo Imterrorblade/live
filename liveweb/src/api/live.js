@@ -1,7 +1,7 @@
 import request from '@/utils/request.js'
 
 export default {
-  ping(){
+  ping () {
     return request({
       method: 'get',
       url: '/ping'

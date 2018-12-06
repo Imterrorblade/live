@@ -1,6 +1,11 @@
-const User = require('./model.js')
-const modelDao = require('../../util/modelDao.js')
+const modelDao = require('../../util/modelDao.js');
 
-module.exports = {
-  modelDao: modelDao.getModelDao('User', User)
-}
+const model = {
+  username: String,
+  label: String,
+  img: String,
+  password: String
+};
+
+module.exports = modelDao.getModelDao('User', model)
+

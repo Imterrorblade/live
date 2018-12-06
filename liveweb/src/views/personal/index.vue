@@ -4,7 +4,7 @@
 <script>
 import ContainCom from '@/views/contain'
 export default {
-  data(){
+  data () {
     return {}
   },
   components: {
@@ -12,4 +12,3 @@ export default {
   }
 }
 </script>
-
