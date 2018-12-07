@@ -8,7 +8,11 @@ router.get('/findAll', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next) {
-  res.json(UserService.register(req.body))
+  UserService.register(req.body).then(data => {
+    res.json(data)
+  }).catch(err => {
+    res.send(err)
+  })
 })
 
 module.exports = router;
