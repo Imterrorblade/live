@@ -13,5 +13,15 @@ export default {
       url: '/users/register',
       data
     })
+  },
+  login (data) {
+    return request({
+      method: 'post',
+      url: '/users/login',
+      data: {
+        username: data.username,
+        password: data.password
+      }
+    })
   }
 }

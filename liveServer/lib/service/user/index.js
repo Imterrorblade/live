@@ -29,23 +29,36 @@ module.exports = {
         if (err) {
           reject(err)
         }
-        resolve(dat)
+        resolve(data)
       })
     })
   },
   async register(data) {
-    return new Promise((resolve, reject => {
+    return new Promise((resolve, reject) => {
       this.findByUserName(data.username).then(person => {
         if(person){
           reject(new Error('用户名已存在'))
         }
-        UserDao.save(data, (err, data)=> {
+        UserDao.create(data, (err, data)=> {
           if(err){
             reject(err)
           }
           resolve(data)
         })
       })
-    }))
+    })
+  },
+  login(data){
+    return new Promise((resolve, reject)=> {
+      this.findOne(data).then(data => {
+        if(data){
+          resolve(data)
+        } else {
+          throw new Error('用户或密码错误')
+        }
+      }).catch(err => {
+        reject(err)
+      })
+    })
   }
 }

@@ -2,7 +2,15 @@ export default [{
   path: 'live',
   name: '直播',
   component: () => import('@/views/live/index.vue'),
-  children: []
+  children: [{
+    path: '',
+    name: 'home',
+    component: () => import('@/views/live/home.vue')
+  }, {
+    path: 'live',
+    name: 'myLive',
+    component: () => import('@/views/live/live.vue')
+  }]
 }, {
   path: 'chart',
   name: '聊天',

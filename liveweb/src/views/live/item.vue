@@ -1,14 +1,15 @@
 <template>
-  <Menus></Menus>
+  <div>
+  </div>
 </template>
 <script>
-import Menus from '@/views/contain/menus'
+import FooterBar from '@/views/contain/footerBar'
 export default {
   data () {
     return {}
   },
   components: {
-    Menus
+    FooterBar
   }
 }
 </script>

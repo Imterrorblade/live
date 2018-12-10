@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let instance = axios.create({
   baseURL: '_api_',
-  timeout: 10000,
+  timeout: 30000,
   henader: {}
 })
 
