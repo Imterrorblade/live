@@ -35,11 +35,15 @@ export default {
       }).then(res => {
         if (res.data.success) {
           this.$toast('登录成功')
+          this.$store.dispatch('setUser', res.data.data)
           this.$router.push({
             path: '/'
           })
+        } else {
+          this.$toast(res.data.message)
         }
       }).catch(err => {
+        this.$toast(err.message)
         console.log(err)
       })
     }
