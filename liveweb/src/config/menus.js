@@ -10,6 +10,10 @@ export default [{
     path: 'live',
     name: 'myLive',
     component: () => import('@/views/live/live.vue')
+  }, {
+    path: 'item',
+    name: 'item',
+    component: () => import('@/views/live/item.vue')
   }]
 }, {
   path: 'chart',

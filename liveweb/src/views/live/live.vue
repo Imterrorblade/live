@@ -12,15 +12,21 @@
 </template>
 <script>
 import FooterBar from '@/views/contain/footerBar'
+import io from 'socket.io-client'
 export default {
   data () {
     return {
       isLiving: false,
-      stream: ''
+      stream: '',
+      socket: '',
+      mediaRecorder: '',
+      chunks: []
     }
   },
   methods: {
-    init () {},
+    init () {
+      this.getWs()
+    },
     startLive () {
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
       if (navigator.getUserMedia) {
@@ -28,6 +34,7 @@ export default {
           video: true
         }, stream => {
           this.stream = stream
+          this.startRecording(stream)
           const video = this.$refs.video
           video.src = window.URL.createObjectURL(stream)
           video.play()
@@ -43,7 +50,65 @@ export default {
         track.stop()
       })
       this.isLiving = false
+    },
+    startRecording (stream) {
+      console.log('start recording ...')
+      if (typeof MediaRecorder.isTypeSupported === 'function') {
+        var options
+        if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+          options = {mimeType: 'video/webm;codecs=h264'}
+        } else if (MediaRecorder.isTypeSupported('video/webm;codecd=h264')) {
+          options = {mimeType: 'video/webm;codecs=h264'}
+        } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8')) {
+          options = {mimeType: 'video/webm;codecs=vp8'}
+        }
+        console.log('using ' + options.mimeType)
+        this.mediaRecorder = new MediaRecorder(stream, options)
+      } else {
+        console.log('isTypeSuported is not supported ,using default codecs for browser')
+        this.mediaRecorder = new MediaRecorder(stream)
+      }
+      this.mediaRecorder.start(10)
+      this.watchMediaRecorder()
+    },
+    watchMediaRecorder () {
+      this.mediaRecorder.ondataavailable = (e) => {
+        // const _self = this
+        this.chunks.push(e.data)
+        const reader = new FileReader()
+        reader.addEventListener('loadend', () => {
+          const buf = new Uint8Array(reader.result)
+          if (reader.result.byteLength > 0) {
+            this.socket.emit('pushStream', {
+              username: 'player_test',
+              data: buf
+            })
+          }
+        })
+        reader.readAsArrayBuffer(e.data)
+      }
+      this.mediaRecorder.onerror = e => {
+        console.log('error ' + e)
+      }
+      this.mediaRecorder.onstart = () => {
+        console.log('started & state = ' + this.mediaRecorder.state)
+      }
+      this.mediaRecorder.onstop = () => {
+        console.log('stopped & state = ' + this.mediaRecorder.state)
+      }
+    },
+    getWs () {
+      this.socket = io.connect('http://localhost:3000/live')
+      this.socket.on('connect', (message) => {
+        console.log('live socketio connected')
+      })
+      this.socket.on('message', data => {
+        console.log(data)
+      })
     }
+  },
+  mounted () {
+    this.init()
   },
   components: {
     FooterBar

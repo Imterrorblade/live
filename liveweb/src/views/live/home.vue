@@ -15,7 +15,9 @@ import api from '@/api/live.js'
 import ContainCom from '@/views/contain'
 export default {
   data () {
-    return {}
+    return {
+      lives: []
+    }
   },
   methods: {
     init () {
