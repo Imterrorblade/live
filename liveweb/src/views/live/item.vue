@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video width="100%" src="http://localhost:3000/public/assets/video/player_test.webm"></video>
+    <video width="100%" src="http://localhost:3001/live/player_test/index.m3u8"></video>
   </div>
 </template>
 <script>

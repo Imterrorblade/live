@@ -79,7 +79,7 @@ export default {
         reader.addEventListener('loadend', () => {
           const buf = new Uint8Array(reader.result)
           if (reader.result.byteLength > 0) {
-            this.socket.emit('pushStream', {
+            this.socket.emit('pushVideo', {
               username: 'player_test',
               data: buf
             })
@@ -87,6 +87,9 @@ export default {
         })
         reader.readAsArrayBuffer(e.data)
       }
+      this.socket.emit('pushStream', {
+        username: 'player_test'
+      })
       this.mediaRecorder.onerror = e => {
         console.log('error ' + e)
       }

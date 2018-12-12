@@ -10,19 +10,20 @@ module.exports = {
     })
     const buf = new Uint8Array(array)
     const filepath = path.resolve('public/assets/video', fileName + '.webm')
-    const outputPath = 'http://localhost:3001/live/' + fileName
-    fs.writeFile(
+    fs.appendFile(
       filepath,
       buf,
       function (err) {
         if (err) {
           console.log(err)
         }
-        this.pushStream(filepath, outputPath)
       }
     )
   },
-  pushStream(inputPath, outputPath) {
+  pushStream(fileName) {
+    const inputPath = '/public/assets/video'+ fileName + '.webm'
+    const outputPath = 'rtmp://localhost:1935/live/' + fileName
+    const outputStream = fs.createWriteStream(outputPath)
     console.log('推流开始')
     ffmpeg(inputPath)
       .inputOptions('-re')
@@ -73,7 +74,7 @@ module.exports = {
         '-b:a 96k'
       ])
       .format('flv')
-      .pipe(outputPath, {
+      .pipe(outputStream, {
         end: true
       })
   },
