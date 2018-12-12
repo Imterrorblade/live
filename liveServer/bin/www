@@ -33,6 +33,11 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 
+// start media-server
+
+require('../mediaServer/index.js')
+
+
 // io.sockets.on('connection', function(socket){
 //   console.log('new user connected')
 //   socket.emit('message', '你好')
