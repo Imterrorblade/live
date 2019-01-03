@@ -4,9 +4,9 @@
       <mt-button fixed icon="more" slot="right" @click.native="startLive"></mt-button>
     </mt-header>
     <contain-com>
-      <h5 v-for="(live, index) in lives" :key="index">
+      <!-- <h5 v-for="(live, index) in lives" :key="index">
         <img :src="live.img" />
-      </h5>
+      </h5> -->
     </contain-com>
   </div>
 </template>

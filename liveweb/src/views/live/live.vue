@@ -36,7 +36,8 @@ export default {
           this.stream = stream
           this.startRecording(stream)
           const video = this.$refs.video
-          video.src = window.URL.createObjectURL(stream)
+          // video.src = window.URL.createObjectURL(stream)
+          video.srcObject = stream
           video.play()
           this.isLiving = true
         }, err => {
@@ -77,19 +78,19 @@ export default {
         this.chunks.push(e.data)
         const reader = new FileReader()
         reader.addEventListener('loadend', () => {
-          const buf = new Uint8Array(reader.result)
-          if (reader.result.byteLength > 0) {
-            this.socket.emit('pushVideo', {
-              username: 'player_test',
-              data: buf
-            })
-          }
+          // const buf = new Uint8Array(reader.result)
+          // if (reader.result.byteLength > 0) {
+          //   this.socket.emit('pushVideo', {
+          //     username: 'player_test',
+          //     data: buf
+          //   })
+          // }
         })
         reader.readAsArrayBuffer(e.data)
       }
-      this.socket.emit('pushStream', {
-        username: 'player_test'
-      })
+      // this.socket.emit('pushStream', {
+      //   username: 'player_test'
+      // })
       this.mediaRecorder.onerror = e => {
         console.log('error ' + e)
       }

@@ -20,8 +20,8 @@ export default new Router({
       path: '/',
       name: '首页',
       component: HomeCom,
-      children: router,
-      redirect: '/live'
+      children: router
+      // redirect: '/live'
     }
   ]
 })

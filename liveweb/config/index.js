@@ -3,6 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const fs = require('fs')
 
 module.exports = {
   dev: {
@@ -14,6 +15,7 @@ module.exports = {
       '/_api_': {
         target: 'http://localhost:3000',
         changeOrigin: true,
+        secure: false,
         pathRewrite: {
           '^/_api_': '/'
         }
@@ -21,6 +23,13 @@ module.exports = {
     },
 
     // Various Dev Server settings
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, '../static/ca/server.pem')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, '../static/ca/server.csr')),
+
+    //   ca: fs.readFileSync(path.resolve(__dirname, '../static/ca/ca.pem'))
+    // },
+    https: true,
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
@@ -41,7 +50,7 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
